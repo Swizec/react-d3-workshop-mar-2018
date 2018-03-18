@@ -21,57 +21,26 @@ class App extends Component {
     colorIndex = scaleOrdinal();
 
     componentDidMount() {
-        d3Csv("transport.csv").then(data => {
-            const cachedData = data.map(d => ({
-                ...d,
-                amount: Number(d["In main currency"].replace(",", ""))
-            }));
-
-            const tags = Object.keys(
-                groupByFunc(cachedData, d => d.Tags.split(", ").sort())
-            );
-
-            this.colorScale.colors(tags);
-            this.colorIndex
-                .domain(tags)
-                .range(tags.map((_, i) => i / tags.length));
-
-            this.setState({
-                cachedData,
-                cacheIndex: 0
-            });
-            this.startTrickle();
-        });
+        // load & parse data
     }
 
     startTrickle() {
-        this.timer = setInterval(() => {
-            let { data, cachedData, cacheIndex } = this.state;
-
-            if (cacheIndex < cachedData.length) {
-                this.setState({
-                    data: [...data, cachedData[cacheIndex]],
-                    cacheIndex: cacheIndex + 1
-                });
-            } else {
-                this.stop();
-            }
-        }, 100);
+        // fill data out of cachedData
     }
 
     componentWillUnmount() {
-        clearInterval(this.timer);
+        // stop timer
     }
 
     stop() {
-        clearInterval(this.timer);
+        // stop timer
     }
 
     color(tag) {
-        return this.colorScale(this.colorIndex(tag));
+        // helper to get color for a tag
     }
 
-    selectTag = tag => this.setState({ selectedTag: tag });
+    // selectTag function
 
     render() {
         let { data, selectedTag, cachedData } = this.state;
@@ -83,30 +52,7 @@ class App extends Component {
                     <h1 className="App-title">A pie chart with transitions</h1>
                 </header>
                 <h3>{selectedTag || "<hover something>"}</h3>
-                <p className="App-intro">
-                    <svg width="1024" height="600">
-                        <Piechart
-                            data={data}
-                            color={d => this.color(d.data.tag)}
-                            groupBy={d => d.Tags.split(", ").sort()}
-                            x={250}
-                            y={300}
-                            selectTag={this.selectTag}
-                            selectedTag={selectedTag}
-                        />
-                        <Barchart
-                            data={data}
-                            color={d => this.color(d.tag)}
-                            groupBy={d => d.Tags.split(", ").sort()}
-                            x={600}
-                            y={500}
-                            width={400}
-                            height={400}
-                            selectTag={this.selectTag}
-                            selectedTag={selectedTag}
-                        />
-                    </svg>
-                </p>
+                <p className="App-intro">{/* put dataviz here */}</p>
             </div>
         );
     }
