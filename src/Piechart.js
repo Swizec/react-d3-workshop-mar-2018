@@ -26,9 +26,20 @@ class Piechart extends Component {
         const _data = groupByFunc(data, groupBy);
 
         // data for each arc, from this.pie(_data).map(....
-
         // render arcs in a loop
-        return null;
+        return (
+            <g transform={`translate(${x}, ${y})`}>
+                {this.pie(_data).map(d => (
+                    <Arc
+                        d={d}
+                        key={d.data.tag}
+                        color={color(d.data.tag)}
+                        selectTag={selectTag}
+                        selected={selectedTag === d.tag}
+                    />
+                ))}
+            </g>
+        );
     }
 }
 

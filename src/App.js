@@ -81,10 +81,10 @@ class App extends Component {
                 </header>
                 <h3>{selectedTag || "<hover something>"}</h3>
                 <p className="App-intro">
-                    <svg width="800" height="600">
+                    <svg width="1024" height="600">
                         <Piechart
-                            x={100}
-                            y={100}
+                            x={150}
+                            y={200}
                             data={cachedData}
                             color={tag => this.color(tag)}
                             groupBy={d => d.Tags.split(", ").sort()}
@@ -92,7 +92,7 @@ class App extends Component {
                             selectedTag={selectedTag}
                         />
                         <Barchart
-                            x={300}
+                            x={400}
                             y={100}
                             width={400}
                             height={300}

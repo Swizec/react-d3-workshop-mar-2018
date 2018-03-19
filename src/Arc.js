@@ -33,9 +33,16 @@ class Arc extends Component {
     // d3.arc is your friend
 
     render() {
+        const { d, color, selected } = this.props;
+
         // render a <path>
         // d={} <-- feed datapoint into this.arc()
-        return null;
+        return (
+            <path
+                d={this.arc(d)}
+                style={{ fill: selected ? color.saturate(2) : color }}
+            />
+        );
     }
 }
 
