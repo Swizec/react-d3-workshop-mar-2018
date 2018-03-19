@@ -76,7 +76,18 @@ class App extends Component {
                     <h1 className="App-title">A pie chart with transitions</h1>
                 </header>
                 <h3>{selectedTag || "<hover something>"}</h3>
-                <p className="App-intro">{/* put dataviz here */}</p>
+                <p className="App-intro">
+                    <svg width="800" height="600">
+                        <Barchart
+                            x={300}
+                            y={100}
+                            width={400}
+                            height={300}
+                            data={cachedData}
+                            groupBy={d => d.Tags.split(", ").sort()}
+                        />
+                    </svg>
+                </p>
             </div>
         );
     }

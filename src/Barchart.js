@@ -6,8 +6,27 @@ import Bar from "./Bar";
 
 class Barchart extends Component {
     // set up scales
+    xScale = d3.scaleBand().paddingInner(0.1);
+    yScale = d3.scaleLinear();
 
     // keep D3 things updated
+    componentWillMount() {
+        this.updateD3(this.props);
+    }
+
+    componentWillUpdate(props) {
+        this.updateD3(props);
+    }
+
+    updateD3(props) {
+        const { data, groupBy } = props;
+        const _data = groupByFunc(data, groupBy);
+
+        this.xScale.domain(_data.map(d => d.tag)).range([0, props.width]);
+        this.yScale
+            .domain([0, d3.max(_data, d => d.amount)])
+            .range([0, props.height]);
+    }
 
     render() {
         const {
@@ -17,14 +36,25 @@ class Barchart extends Component {
             groupBy,
             color,
             selectedTag,
-            selectTag
+            selectTag,
+            height
         } = this.props;
 
         const _data = groupByFunc(data, groupBy);
 
-        // render bars in a loop
-
-        return null;
+        return (
+            <g transform={`translate(${x}, ${y})`}>
+                {_data.map(d => (
+                    <Bar
+                        x={this.xScale(d.tag)}
+                        y={height - this.yScale(d.amount)}
+                        width={this.xScale.bandwidth()}
+                        height={this.yScale(d.amount)}
+                        key={d.tag}
+                    />
+                ))}
+            </g>
+        );
     }
 }
 
