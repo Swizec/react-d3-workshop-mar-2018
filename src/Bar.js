@@ -2,25 +2,18 @@ import React, { Component } from "react";
 import * as d3 from "d3";
 
 class Bar extends Component {
-    state = {
-        selected: false
-    };
     mouseOver = () => {
-        this.setState({
-            selected: true
-        });
+        this.props.selectTag(this.props.tag);
     };
 
     mouseOut = () => {
-        this.setState({
-            selected: false
-        });
+        this.props.selectTag(null);
     };
 
     // render an appropriately sized rectangle
     render() {
-        const { x, y, width, height, tag, color } = this.props;
-        const { selected } = this.state;
+        const { x, y, width, height, tag, color, selected } = this.props;
+
         return (
             <rect
                 x={x}

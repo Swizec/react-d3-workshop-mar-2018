@@ -53,6 +53,8 @@ class Barchart extends Component {
                         color={color}
                         tag={d.tag}
                         key={d.tag}
+                        selectTag={selectTag}
+                        selected={d.tag === selectedTag}
                     />
                 ))}
             </g>

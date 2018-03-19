@@ -60,6 +60,10 @@ class App extends Component {
     }
 
     // selectTag function
+    selectTag = tag =>
+        this.setState({
+            selectedTag: tag
+        });
 
     render() {
         let { data, selectedTag, cachedData } = this.state;
@@ -86,6 +90,8 @@ class App extends Component {
                             data={cachedData}
                             color={tag => this.color(tag)}
                             groupBy={d => d.Tags.split(", ").sort()}
+                            selectTag={this.selectTag}
+                            selectedTag={selectedTag}
                         />
                     </svg>
                 </p>
