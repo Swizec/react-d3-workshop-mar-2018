@@ -50,6 +50,8 @@ class Barchart extends Component {
                         y={height - this.yScale(d.amount)}
                         width={this.xScale.bandwidth()}
                         height={this.yScale(d.amount)}
+                        color={color}
+                        tag={d.tag}
                         key={d.tag}
                     />
                 ))}

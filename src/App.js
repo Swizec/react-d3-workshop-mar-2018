@@ -56,7 +56,7 @@ class App extends Component {
     }
 
     color(tag) {
-        // helper to get color for a tag
+        return this.colorScale(this.colorIndex(tag));
     }
 
     // selectTag function
@@ -84,6 +84,7 @@ class App extends Component {
                             width={400}
                             height={300}
                             data={cachedData}
+                            color={tag => this.color(tag)}
                             groupBy={d => d.Tags.split(", ").sort()}
                         />
                     </svg>
