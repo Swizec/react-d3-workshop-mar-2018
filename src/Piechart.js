@@ -35,7 +35,7 @@ class Piechart extends Component {
                         key={d.data.tag}
                         color={color(d.data.tag)}
                         selectTag={selectTag}
-                        selected={selectedTag === d.tag}
+                        selected={selectedTag === d.data.tag}
                     />
                 ))}
             </g>

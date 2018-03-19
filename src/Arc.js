@@ -29,6 +29,14 @@ class Arc extends Component {
         .outerRadius(150)
         .cornerRadius(8);
 
+    mouseOver = () => {
+        this.props.selectTag(this.props.d.data.tag);
+    };
+
+    mouseOut = () => {
+        this.props.selectTag(null);
+    };
+
     // make an arc, render it
     // d3.arc is your friend
 
@@ -41,6 +49,8 @@ class Arc extends Component {
             <path
                 d={this.arc(d)}
                 style={{ fill: selected ? color.saturate(2) : color }}
+                onMouseOver={this.mouseOver}
+                onMouseOut={this.mouseOut}
             />
         );
     }
