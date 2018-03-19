@@ -82,6 +82,15 @@ class App extends Component {
                 <h3>{selectedTag || "<hover something>"}</h3>
                 <p className="App-intro">
                     <svg width="800" height="600">
+                        <Piechart
+                            x={100}
+                            y={100}
+                            data={cachedData}
+                            color={tag => this.color(tag)}
+                            groupBy={d => d.Tags.split(", ").sort()}
+                            selectTag={this.selectTag}
+                            selectedTag={selectedTag}
+                        />
                         <Barchart
                             x={300}
                             y={100}

@@ -23,8 +23,20 @@ function arcTween(oldData, newData, arc) {
 }
 
 class Arc extends Component {
+    arc = d3
+        .arc()
+        .innerRadius(80)
+        .outerRadius(150)
+        .cornerRadius(8);
+
     // make an arc, render it
     // d3.arc is your friend
+
+    render() {
+        // render a <path>
+        // d={} <-- feed datapoint into this.arc()
+        return null;
+    }
 }
 
 export default Arc;
