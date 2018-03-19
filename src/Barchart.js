@@ -23,6 +23,8 @@ class Barchart extends Component {
         const _data = groupByFunc(data, groupBy);
 
         // render bars in a loop
+
+        return null;
     }
 }
 

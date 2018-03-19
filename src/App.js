@@ -21,7 +21,26 @@ class App extends Component {
     colorIndex = scaleOrdinal();
 
     componentDidMount() {
-        // load & parse data
+        d3Csv("transport.csv").then(data => {
+            const cachedData = data.map(d => ({
+                ...d,
+                amount: Number(d["In main currency"].replace(",", ""))
+            }));
+
+            const tags = Object.keys(
+                groupByFunc(cachedData, d => d.Tags.split(", ").sort())
+            );
+
+            this.colorScale.colors(tags);
+            this.colorIndex
+                .domain(tags)
+                .range(tags.map((_, i) => i / tags.length));
+
+            this.setState({
+                cachedData,
+                cacheIndex: 0
+            });
+        });
     }
 
     startTrickle() {
@@ -44,6 +63,11 @@ class App extends Component {
 
     render() {
         let { data, selectedTag, cachedData } = this.state;
+
+        // add svg element
+        // render Barchart
+        // give cachedData to Barchart as data={cachedData}
+        // implement barchart internals with <rect> for each datapoint
 
         return (
             <div className="App">

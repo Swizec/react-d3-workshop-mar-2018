@@ -20,6 +20,7 @@ class Piechart extends Component {
         const _data = groupByFunc(data, groupBy);
 
         // render arcs in a loop
+        return null;
     }
 }
 
